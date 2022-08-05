@@ -1,0 +1,129 @@
+<template>
+    <app-layout>
+        <template #header>
+            <h1
+                class="text-center text-2xl font-bold leading-7 text-gray-300 sm:text-3xl sm:truncate py-4 bg-gradient-to-l from-indigo-500 to-indigo-800"
+            >
+                CREAR ALUMNO
+            </h1>
+        </template>
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <form @submit.prevent="submit" class="mb-6">
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7"
+                        >
+                            <div class="grid grid-cols-1">
+                                <label
+                                    class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                    >Nombre</label
+                                >
+                                <input
+                                    id="Nombre"
+                                    v-model="form.Nombre"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                    type="text"
+                                    placeholder="Nombre"
+                                />
+                            </div>
+
+                            <div class="grid grid-cols-1">
+                                <label
+                                    class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                    >Email</label
+                                >
+                                <input
+                                    id="Email"
+                                    v-model="form.Email"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                    type="text"
+                                    placeholder="Email"
+                                />
+                            </div>
+
+                            <div class="grid grid-cols-1">
+                                <label
+                                    class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold"
+                                    >Telefono</label
+                                >
+                                <input
+                                    id="NumTel"
+                                    v-model="form.NumTel"
+                                    class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                    type="text"
+                                    placeholder="Telefono"
+                                />
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex justify-end md:gap-8 gap-4 pt-5 pb-5 pr-5"
+                        >
+                            <Link
+                                :href="route('alumnos.index')"
+                                class="w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                                type="button"
+                            >
+                                Cancelar
+                            </Link>
+                            <button
+                                type="submit"
+                                class="w-auto bg-purple-500 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2"
+                            >
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </app-layout>
+</template>
+
+<script>
+import AppLayout from "@/Layouts/AppLayout";
+import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Inertia } from "@inertiajs/inertia";
+export default {
+    components: {
+        AppLayout,
+        Link,
+    },
+    props: {
+        errors: Object,
+    },
+
+    /*   setup() {
+        const form = {
+            Nombre: null,
+            Email: null,
+            NumTel: null,
+        };
+
+        const submit = () => {
+            form.post(route("alumnos.store"), this.form);
+        };
+        return {
+            form,
+            submit,
+        };
+    }, */
+
+    data() {
+        return {
+            form: {
+                Nombre: null,
+                Email: null,
+                NumTel: null,
+            },
+        };
+    },
+    methods: {
+        submit() {
+            this.$inertia.post(route("alumnos.store"), this.form);
+        },
+    },
+};
+</script>
